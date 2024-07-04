@@ -24,3 +24,20 @@ The VBA script `TickerPriceMacro` performs a comprehensive analysis of stock pri
 9. **Extend Columns J, O, P, Q, S, T, U**: Auto-fits the width of columns J, O, P, Q, S, T, and U to ensure that all data is visible and neatly presented.
 
 At the end of the script, a message box notifies the user that the "Ticker Price Macro has completed successfully for all worksheets!", indicating the completion of the analysis.
+
+10. Q1 Screen Shot Results
+
+![alt text](Q1_screenshot_results.png)
+
+11. Q2 Screen Shot Results
+
+![alt text](Q2_screenshot_results.png)
+
+12. Q3 Screen Shot Results 
+
+![alt text](Q3_screenshot_results.png)
+
+13. Q4 Screen Shot Results
+
+![alt text](Q4_screenshot_results.png)
+
