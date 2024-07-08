@@ -1,43 +1,47 @@
 The VBA script `TickerPriceMacro` performs a comprehensive analysis of stock prices across multiple worksheets in an Excel workbook. Below is a breakdown of the steps involved:
 
-1. **Define Variables**: Initializes variables for worksheets, the last row with data, loop counters, ranges, ticker symbols, dates, and prices.
+# Stock Data Processing Macro
 
-2. **Loop Through Worksheets**: Iterates over each worksheet within the workbook to perform the analysis on each sheet.
+## Step 1: Create the CONCAT Column
+The macro creates a new column H and populates it with concatenated values of ticker (column A) and date (column B) in the format "mm/dd/yyyy".
 
-3. **Create CONCAT Column**: In column H, a "CONCAT" column is created, combining the ticker symbol from column A and the date from column B into a single string, formatted as "mm/dd/yyyy".
+## Step 2: Copy Unique Tickers to Column J
+The macro uses a dictionary to collect unique tickers from column A and writes them to column J.
 
-4. **Copy Unique Tickers to Column J**: Copies all ticker symbols from column A to column J, then removes duplicates to leave only unique ticker symbols.
+## Step 3: Calculate Earliest and Latest Dates
+For each unique ticker, the macro calculates the earliest and latest dates, corresponding opening and closing prices, and total stock volume:
 
-5. **Calculate Dates, Prices, and Changes**:
-   - **Earliest and Latest Dates**: For each unique ticker in column J, the script calculates the earliest (open) and latest (close) dates from column B.
-   - **Open and Close Prices**: Finds the opening price on the earliest date and the closing price on the latest date for each ticker, using the `INDEX` and `MATCH` functions, and records these in columns M and N.
-   - **Quarterly Change and Percent Change**: Calculates the difference between the close and open prices (quarterly change) and the percent change from open to close price, placing these in columns O and P.
-   - **Total Stock Volume**: Calculates the total stock volume for each ticker and places this in column Q.
+- It iterates through the rows to find the minimum and maximum dates for each ticker.
+- It also calculates the total volume for each ticker.
+- The results are written to columns K (open date), L (close date), M (open price), N (close price), O (quarterly change), P (percent change), and Q (total stock volume).
 
-6. **Apply Conditional Formatting**:
-   - Applies green color formatting to positive values and red to negative values in the "Quarterly Change" column (O) and the "Percent Change" column (P).
+## Step 4: Apply Conditional Formatting
+The macro applies conditional formatting to columns O "Quarterly Change"
 
-7. **Summary Statistics**: Calculates and displays the greatest percent increase, greatest percent decrease, and greatest total volume for the tickers analyzed, along with their corresponding tickers.
+- Green color for positive values.
+- Red color for negative values.
 
-8. **Hide Intermediate Columns**: Hides columns H and K through N, which are used for intermediate calculations and not needed for the final presentation.
+## Step 5: Summary Statistics
+The macro calculates summary statistics for the greatest percentage increase, decrease, and total volume:
 
-9. **Extend Columns J, O, P, Q, S, T, U**: Auto-fits the width of columns J, O, P, Q, S, T, and U to ensure that all data is visible and neatly presented.
+- It iterates through the tickers to find the maximum and minimum percentage changes and the maximum total volume.
+- The results are written to columns S (Greatest % Increase), T (Greatest % Decrease), and U (Greatest Total Volume).
 
 At the end of the script, a message box notifies the user that the "Ticker Price Macro has completed successfully for all worksheets!", indicating the completion of the analysis.
 
-10. Q1 Screen Shot Results
+## Q1 Screen Shot Results
 
-![alt text](Q1_screenshot_results.png)
+![alt text](<Screenshot Q1.png>)
 
-11. Q2 Screen Shot Results
+## Q2 Screen Shot Results
 
-![alt text](Q2_screenshot_results.png)
+![alt text](<Screenshot Q2.png>)
 
-12. Q3 Screen Shot Results 
+## Q3 Screen Shot Results 
 
-![alt text](Q3_screenshot_results.png)
+![alt text](<Screenshot Q3.png>)
 
-13. Q4 Screen Shot Results
+## Q4 Screen Shot Results
 
-![alt text](Q4_screenshot_results.png)
+![alt text](<Screenshot Q4.png>)
 

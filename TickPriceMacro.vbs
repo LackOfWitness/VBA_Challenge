@@ -56,22 +56,13 @@ Sub TickerPriceMacro()
             ws.Cells(i, "Q").Value = Application.WorksheetFunction.SumIfs(ws.Range("G:G"), ws.Range("A:A"), ticker)
         Next i
         
-        ' Step 4: Apply conditional formatting to columns O and P
+        ' Step 4: Apply conditional formatting to columns O "Quarterly Change"
         Set rng = ws.Range("O2:O" & ws.Cells(ws.Rows.Count, "J").End(xlUp).Row)
         rng.FormatConditions.Delete
         With rng.FormatConditions.Add(Type:=xlExpression, Formula1:="=$O2>0")
             .Interior.Color = RGB(0, 255, 0) ' Green
         End With
         With rng.FormatConditions.Add(Type:=xlExpression, Formula1:="=$O2<0")
-            .Interior.Color = RGB(255, 0, 0) ' Red
-        End With
-        
-        Set rng = ws.Range("P2:P" & ws.Cells(ws.Rows.Count, "J").End(xlUp).Row)
-        rng.FormatConditions.Delete
-        With rng.FormatConditions.Add(Type:=xlExpression, Formula1:="=$P2>0")
-            .Interior.Color = RGB(0, 255, 0) ' Green
-        End With
-        With rng.FormatConditions.Add(Type:=xlExpression, Formula1:="=$P2<0")
             .Interior.Color = RGB(255, 0, 0) ' Red
         End With
         
@@ -82,25 +73,22 @@ Sub TickerPriceMacro()
         ws.Range("T1").Value = "Ticker"
         ws.Range("U1").Value = "Value"
         
+        ws.Range("T2").FormulaR1C1 = "=INDEX(C[-10], MATCH(MAX(C[-4]), C[-4], 0))"
+        ws.Range("T3").FormulaR1C1 = "=INDEX(C[-10], MATCH(MIN(C[-4]), C[-4], 0))"
+        ws.Range("T4").FormulaR1C1 = "=INDEX(C[-10], MATCH(MAX(C[-3]), C[-3], 0))"
+        
+        ws.Range("U2").FormulaR1C1 = "=MAX(C[-5])"
+        ws.Range("U3").FormulaR1C1 = "=MIN(C[-5])"
+        ws.Range("U4").FormulaR1C1 = "=MAX(C[-4])"
+        
         ws.Range("U2:U3").NumberFormat = "0.00%"
         ws.Range("P2:P" & ws.Cells(ws.Rows.Count, "J").End(xlUp).Row).NumberFormat = "0.00%"
         
         ' Step 6: Hide intermediate columns
         ws.Columns("H:H").EntireColumn.Hidden = True
         ws.Columns("K:N").EntireColumn.Hidden = True
-
-        ' Step 7: Extend columns J, O, P, Q, S, T, U
-        ws.Columns("J:J").EntireColumn.AutoFit
-        ws.Columns("O:O").EntireColumn.AutoFit
-        ws.Columns("P:P").EntireColumn.AutoFit
-        ws.Columns("Q:Q").EntireColumn.AutoFit
-        ws.Columns("S:S").EntireColumn.AutoFit
-        ws.Columns("T:T").EntireColumn.AutoFit
-        ws.Columns("U:U").EntireColumn.AutoFit
-
     Next ws
-
-
     
     MsgBox "Ticker Price Macro has completed successfully for all worksheets!"
 End Sub
+
