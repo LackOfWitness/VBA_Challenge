@@ -10,6 +10,7 @@ Sub TickerPriceMacro()
     Dim maxDate As Date
     Dim openPrice As Double
     Dim closePrice As Double
+    Dim TotalStockVolume As Double ' Added TotalStockVolume variable
     
     ' Loop through each worksheet in the workbook
     For Each ws In ThisWorkbook.Worksheets
@@ -53,7 +54,10 @@ Sub TickerPriceMacro()
             ws.Cells(i, "N").Value = closePrice
             ws.Cells(i, "O").Value = closePrice - openPrice
             ws.Cells(i, "P").Value = IIf(openPrice <> 0, (closePrice - openPrice) / openPrice, 0)
-            ws.Cells(i, "Q").Value = Application.WorksheetFunction.SumIfs(ws.Range("G:G"), ws.Range("A:A"), ticker)
+            
+            totalStockVolume = Application.WorksheetFunction.SumIfs(ws.Range("G:G"), ws.Range("A:A"), ticker)
+            ws.Cells(i, "Q").Value = totalStockVolume
+            
         Next i
         
         ' Step 4: Apply conditional formatting to columns O "Quarterly Change"
